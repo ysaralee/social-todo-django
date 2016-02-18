@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <header>
+            <ul>
+            <h1><b>CPSC 113 Social To-Do App</b></h1>
+            {% if user.is_authenticated %}
+                <li><a href="{%url 'logout'%}?next=/">Log Out</a></li>
+            {% else %}
+                <li><a href="/login/?next=/">Log In</a></li>
+            {% end if %}
+            </ul>
+        </header>
+    </body>
+</html>
