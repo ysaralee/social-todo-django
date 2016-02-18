@@ -1,0 +1,13 @@
+<html>
+<form action="/your-name/" method="post">
+    <head>
+        <title>Your Tasks!</title>
+    </head><br>
+    <h1><b><center>TASKS</center></b></h1>
+    {% csrf_token %}
+    <hr>
+    <hr>
+    <center>{{ form.as_p }}</center><br><br>
+    <center><input type="submit" value="Submit" /></center>
+</form>
+</html>
