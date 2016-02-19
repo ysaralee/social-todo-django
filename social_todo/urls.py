@@ -21,9 +21,10 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^tasks/', include('tasks.urls')),
+    url(r'^tasklist/', include('tasks.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^users/', include('users.urls')),
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^login/', views.login, name='login'),
+    url(r'^logout/', views.logout, name='logout'),
+    url(r'^register/', views.register, name='logout')
 ]
 

@@ -1,5 +1,5 @@
 <html>
-<form action="/tasklist/" method="post">
+<form action="/tasks/" method="post">
     <head><title>CPSC 113 Social To-Do App</title></head><br>
     <h1><b><center>TO-DO LIST</center></b></h1>
     {% csrf_token %}
@@ -10,5 +10,11 @@
     <center><input type="submit" value="Submit" /></center><br>
     <hr>
     <hr>
+        {% if user.is_authenticated %}
+            <li><a href="{%url 'logout'%}?next=/">Log Out</a></li>
+        {% else %}
+            <li><a href="/login/?next=/">Log In</a></li>
+        {% endif %}
+    
 </form>
 </html>
