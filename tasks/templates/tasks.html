@@ -1,30 +1,50 @@
 <html>
-<form action="/tasks/" method="post">
     <head><title>CPSC 113 Social To-Do App</title></head><br>
+    {% if user.is_authenticated %}
+    <center><h3>Welcome, {{user.get_username}}!</h3></center>
+        {% else %}
+            <p>No one is logged in!</p>
+    {% endif %}
     <h1><b><center>TO-DO LIST</center></b></h1>
     {% csrf_token %}
+    {% if task_list %}
+        {% for task in task_list %}
+        <li class="tasks-list-item">
+            <span class="task-title">{{this.title}}</span>
+            <form method="post">
+            <input type="button" name="delete-task" class="delete-task" value="Delete">
+            </form>
+            <form method="post">
+            <input type="button" name="toggle-task" class="toggle-task" value="Mark complete">
+            </form>
+        </li>
+        {% endfor %}
+        {% else %}
+            <center><p>No tasks to show!</p></center>
+    {% endif %}
     <hr>
     <hr>
     <h2><b><center>Submit Task:</center></b></h2>
-            {% if errors %} 
-                {{errors}}
-            {% endif %}
-        <form action="/tasks/create" method="POST" class="submittask">
+        <form action="/tasks/create" method="POST">
             {% csrf_token %}
             <center><input name="title" class = "title" placeholder = "Title"></center><br>
             <center><input name="description" class = "description" placeholder = "Description"></center><br>
             <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 1"></center><br>
             <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 2"></center><br>
             <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 3"></center><br>
-            <center><input type="submit" value="Submit">
+            <center><input type="submit" class="create-task-submit" value="Submit">
         </form>
     <hr>
     <hr>
         {% if user.is_authenticated %}
-            <li><a href="{%url 'logout'%}?next=/">Log Out</a></li>
+            <form action="/logout/" method="POST">
+            {% csrf_token %}
+            <center><input type="submit" value="Log Out">
+            </form>
         {% else %}
-            <li><a href="/login/?next=/">Log In</a></li>
+            <form action="/index/" method="POST">
+            {% csrf_token %}
+            <center><input type="submit" value="Log In">
+            </form>
         {% endif %}
-    
-</form>
 </html>

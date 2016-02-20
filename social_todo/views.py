@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as django_login
+from django.contrib.auth import logout as django_logout
 import datetime
 
 # Create your views here.
@@ -25,6 +26,7 @@ def login(request):
         return render(request, "index.html", {'errors':"The email/password combination is incorrect!"})
 
 def logout(request):
+    django_logout(request)
     return render(request, "index.html")
 
 def register(request):
