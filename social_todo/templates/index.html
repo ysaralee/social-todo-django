@@ -5,9 +5,11 @@
             <h1><b><center>CPSC 113 Social To-Do App</center></b></h1>
             <hr><hr>
             <h2><center>Log-In Here!</center></h2>
+            {% if errors %} 
+                {{errors}}
+            {% endif %}
             <form action="/login/" method="POST" class="login">
                 {% csrf_token %}
-                <center><input name="name" class = "name" placeholder = "Name"></center>
                 <center><input name="email" class = "email" placeholder = "Email"></center>
                 <center><input name="password" class = "password" placeholder = "Password"></center><br>
                 <center><input type="submit" value="Login" /></center><br>
@@ -16,13 +18,16 @@
             <ul>
             <hr><hr>
             <h3><center>Register Here!</center></h3>
+            {% if errors %} 
+                {{errors}}
+            {% endif %}
             <form action="/register/" method="POST" class="register">
                 {% csrf_token %}
                 <center><input name="name" class = "name" placeholder = "Name"></center>
                 <center><input name="email" class = "email" placeholder = "Email"></center>
                 <center><input name="password" class = "password" placeholder = "Password"></center>
                 <center><input name="password-conf" class = "confirm_password" placeholder = "Confirm Password"></center><br>
-                <center><input type="submit" value="Register" /></center><br>
+                <center><input type="submit" value="Register"></center><br>
             </form>
             </ul>
         </header>

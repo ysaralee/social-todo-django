@@ -10,34 +10,38 @@ def index(request):
     return render(request, "index.html")
 
 def login(request):
-    username = request.POST['username']
-    password = request.POST['password']
     email = request.POST['email']
+    password = request.POST['password']
     user = authenticate(username=email, password=password)
-    # if user is not None:
-        # if user.is_active:
-            # login(request, user)
+    if user is not None:
+        if user.is_active:
+            django_login(request, user)
             # Redirect to a success page.
-            # return render(request, "tasks.html")
-        # else:
-            # Return a 'disabled account' error message
-    # else:
-        # return render(request, "index.html")
+            return render(request, "tasks.html")
+        else:
+            # Return a 'Email/Password' error message
+            return render(request, "index.html", {'errors':"The email/password combination is incorrect!"})
+    else:
+        return render(request, "index.html", {'errors':"The email/password combination is incorrect!"})
 
 def logout(request):
     return render(request, "index.html")
 
 def register(request):
-    if request.method == 'POST':
-        username = request.POST['name']
-        email = request.POST['email']
-        password = request.POST['password']
-        confirm_password = request.POST['password-conf']
+    username = request.POST['name']
+    email = request.POST['email']
+    password = request.POST['password']
+    confirm_password = request.POST['password-conf']
  
-        u = User.objects.create_user
-        # create a new user object with that data
-        # u = User(name="", asdf....)
-        login(request, u)
-        # Task.query.filter(Task.completed == True).first()
-        # Task.query.collaborators.contains(1)
-        # redirect to dashboard
+    u = User.objects.create_user (email, email, password)
+    # create a new user object with that data
+    u = authenticate(username=email, email=email, password=password)
+    django_login(request, u)
+    
+    if u is not None: 
+        if password != confirm_password:
+            return render(request, "index.html", {'errors':"Password confirmation does not match password."})
+        else:
+            return render(request, "tasks.html")
+    else:
+        return render(request, "index.html", {'errors':"All the fields are not filled out!"})
