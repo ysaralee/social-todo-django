@@ -9,7 +9,7 @@
             {% if errors %} 
                 {{errors}}
             {% endif %}
-        <form action="/submittask/" method="POST" class="submittask">
+        <form action="/tasks/create" method="POST" class="submittask">
             {% csrf_token %}
             <center><input name="title" class = "title" placeholder = "Title"></center><br>
             <center><input name="description" class = "description" placeholder = "Description"></center><br>
