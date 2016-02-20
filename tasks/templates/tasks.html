@@ -6,8 +6,18 @@
     <hr>
     <hr>
     <h2><b><center>Submit Task:</center></b></h2>
-    <center>{{ form.as_p }}</center><br>
-    <center><input type="submit" value="Submit" /></center><br>
+            {% if errors %} 
+                {{errors}}
+            {% endif %}
+        <form action="/submittask/" method="POST" class="submittask">
+            {% csrf_token %}
+            <center><input name="title" class = "title" placeholder = "Title"></center><br>
+            <center><input name="description" class = "description" placeholder = "Description"></center><br>
+            <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 1"></center><br>
+            <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 2"></center><br>
+            <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 3"></center><br>
+            <center><input type="submit" value="Submit">
+        </form>
     <hr>
     <hr>
         {% if user.is_authenticated %}
