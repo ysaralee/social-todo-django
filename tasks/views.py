@@ -10,10 +10,8 @@ import datetime
 # Create your views here.
 
 def index(request):
-    return render(request, 'tasks.html')
-    
     task_list = Task.objects.all()
-    return render(request, 'index.html', {'task_list': task_list})
+    return render(request, 'tasks.html', {'task_list': task_list})
         
 def submittask(request):
     # create a form instance and populate it with data from the request:
@@ -23,4 +21,5 @@ def submittask(request):
     # collaborators = request.POST['collaborators']
     task = Task.objects.create_task(current_user, title, description)
     
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'tasks.html')

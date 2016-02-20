@@ -10,12 +10,11 @@
     {% if task_list %}
         {% for task in task_list %}
         <li class="tasks-list-item">
-            <span class="task-title">{{this.title}}</span>
+            <center><span class="task-title">{{task.title}}</span></center>
+            <center><i><span class="task-description">{{task.description}}</span></i></center>
             <form method="post">
-            <input type="button" name="delete-task" class="delete-task" value="Delete">
-            </form>
-            <form method="post">
-            <input type="button" name="toggle-task" class="toggle-task" value="Mark complete">
+            <center><input type="button" name="delete-task" class="delete-task" value="Delete"></center>
+            <center><input type="button" name="toggle-task" class="toggle-task" value="Mark complete"></center>
             </form>
         </li>
         {% endfor %}
