@@ -11,7 +11,7 @@
             <form action="/login/" method="POST" class="login">
                 {% csrf_token %}
                 <center><input name="email" class = "email" placeholder = "Email"></center>
-                <center><input name="password" class = "password" placeholder = "Password"></center><br>
+                <center><input name="password" class = "password" input type = "password" placeholder = "Password"></center><br>
                 <center><input type="submit" value="Login"></center><br>
             </form>
             </ul>
@@ -25,8 +25,8 @@
                 {% csrf_token %}
                 <center><input name="name" class = "name" placeholder = "Name"></center>
                 <center><input name="email" class = "email" placeholder = "Email"></center>
-                <center><input name="password" class = "password" placeholder = "Password"></center>
-                <center><input name="password-conf" class = "confirm_password" placeholder = "Confirm Password"></center><br>
+                <center><input name="password" class = "password" input type = "password" placeholder = "Password"></center>
+                <center><input name="password-conf" class = "confirm_password" input type = "password" placeholder = "Confirm Password"></center><br>
                 <center><input type="submit" value="Register"></center><br>
             </form>
             </ul>

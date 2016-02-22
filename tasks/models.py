@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
+import uuid
+
 # Create your models here.
 
 class TaskManager(models.Manager):
@@ -12,9 +14,12 @@ class TaskManager(models.Manager):
         return task
 
 class Task(models.Model):
+    id = models.UUIDField(primary_key = True, default=uuid.uuid4, editable=False)
     owner = models.ForeignKey(User, related_name="owned_tasks")
     title = models.CharField(max_length=500)
     description = models.CharField(max_length=5000)
     collaborators = models.ManyToManyField(User, related_name="tasks")
+    markcomplete = models.BooleanField(default=False)
     
     objects = TaskManager()
+

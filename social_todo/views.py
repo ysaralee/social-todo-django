@@ -19,8 +19,7 @@ def login(request):
         if user.is_active:
             django_login(request, user)
             # Redirect to a success page.
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-            return render(request, "tasks.html")
+            return HttpResponseRedirect ('/tasks/')
         else:
             # Return a 'Email/Password' error message
             return render(request, "index.html", {'errors':"The email/password combination is incorrect!"})

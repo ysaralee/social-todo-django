@@ -12,8 +12,10 @@
         <li class="tasks-list-item">
             <center><span class="task-title">{{task.title}}</span></center>
             <center><i><span class="task-description">{{task.description}}</span></i></center>
-            <form method="post">
+            <form action="/delete/" form method="POST" class="register">
             <center><input type="button" name="delete-task" class="delete-task" value="Delete"></center>
+            </form>
+            <form action="/markcomplete/" form method="POST" class ="markcomplete">
             <center><input type="button" name="toggle-task" class="toggle-task" value="Mark complete"></center>
             </form>
         </li>
