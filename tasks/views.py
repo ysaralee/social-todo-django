@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout as django_logout
 from .models import Task
+from django.db.models import Q
 import datetime
 import uuid
 
@@ -11,8 +12,9 @@ import uuid
 # Create your views here.
 
 def index(request):
-    task_list = Task.objects/filter(Q(owner=user) | Q(collaborators=user))
-    return render(request, 'tasks.html', {'user':user, 'task_list':task_list})
+    current_user = request.user
+    task_list = Task.objects.filter(Q(owner=current_user) | Q(collaborators=current_user))
+    return render(request, 'tasks.html', {'user':current_user, 'task_list':task_list})
         
 def submittask(request):
     # create a form instance and populate it with data from the request:
@@ -32,13 +34,14 @@ def delete(request):
     return HttpResponseRedirect ('/tasks/')
     
 def markcomplete(request):
-    task_id = task_id = request.POST['markcomplete']
+    task_id = request.POST['markcomplete']
     task = Task.objects.get(id=task_id)
     if task.markcomplete == False:
         task.complete = True
         task.save()
     else:
-        task.markcomplete = Falsetask.save()
+        task.markcomplete = False
+        task.save()
     return HttpResponseRedirect ('/tasks/') 
     
     
