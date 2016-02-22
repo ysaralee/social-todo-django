@@ -12,13 +12,17 @@
         <li class="tasks-list-item">
             <center><span class="task-title">{{task.title}}</span></center>
             <center><i><span class="task-description">{{task.description}}</span></i></center>
-            <form action="delete/" form method="POST" class="register">
+            {% if task.isOwnedBy %}
+                <form action="delete" method="POST" class="delete">
+                {% csrf_token %}
+                <input type="hidden" name="delete" value = {{task.id}} />
+                <center><button type="submit" class="delete" value="Delete">Delete</button></center>
+                </form>
+            {% endif %}
+            <form action="markcomplete" method="POST" class ="markcomplete">
             {% csrf_token %}
-            <center><input type="button" name="delete-task" class="delete-task" value="Delete"></center>
-            </form>
-            <form action="markcomplete" form method="POST" class ="markcomplete">
-            {% csrf_token %}
-            <center><button name name="mark_complete" value = {{task.id}} type = "submit"></center>Mark Complete</button>
+            <input type="hidden" name="markcomplete" value = {{task.id}} />
+            <center><button type = "submit">{%if task.markcomplete %}Mark Incomplete{%else%}Mark Complete{% endif %}</button></center>
             </form>
         </li>
         {% endfor %}
@@ -32,9 +36,9 @@
             {% csrf_token %}
             <center><input name="title" class = "title" placeholder = "Title"></center><br>
             <center><input name="description" class = "description" placeholder = "Description"></center><br>
-            <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 1"></center><br>
-            <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 2"></center><br>
-            <center><input type="collaborator" class="collaborator" placeholder = "Collaborator 3"></center><br>
+            <center><input name="collaborator1" type="email" placeholder = "Collaborator 1"></center><br>
+            <center><input name="collaborator2" type="email" placeholder = "Collaborator 2"></center><br>
+            <center><input name="collaborator3" type="email" placeholder = "Collaborator 3"></center><br>
             <center><input type="submit" class="create-task-submit" value="Submit">
         </form>
     <hr>

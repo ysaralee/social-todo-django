@@ -20,6 +20,7 @@ class Task(models.Model):
     description = models.CharField(max_length=5000)
     collaborators = models.ManyToManyField(User, related_name="tasks")
     markcomplete = models.BooleanField(default=False)
+    isOwnedBy = models.BooleanField(default=True)
     
     objects = TaskManager()
 
